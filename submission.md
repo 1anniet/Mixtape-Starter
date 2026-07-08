@@ -1,5 +1,11 @@
 # Submission Doc
 
+## AI Usage
+
+During this project, I used AI tools to accelerate debugging, understand the responsibilities of unfamiliar code modules, and trace data flow anomalies. I began by feeding Gemini unknown files (such as models.py) and asked it to summarize what each module was responsible for, detailing its main functions and what each one did.
+When pytest failed with stack traces like AssertionError: assert 4 == 5 or assert 1 == 2, I asked the AI to trace the symptoms back to the logical source within the code layer. The AI was incredibly helpful in contextualizing implicit language errors and date mechanics. It immediately pointed out that a Python array slice of [:-1] inherently trims the final index of a collection, which helped me instantly connect why the last song of a playlist was missing from the backend data payload.
+While Gemini laid a good foundation for my understanding, its initial code fixes were sometimes incomplete, so I had to step in. While fixing the playlist indexing error, the AI provided a conceptual code block that accidentally omitted an explicit return keyword at the end of the array builder. When I blindly ran the tests, they crashed with a worse error (TypeError: object of type 'NoneType' has no len()). I had to inspect the code manually, notice that the function was dropping execution flow, and restore the proper return statement myself.
+
 ## Codebase Map
 
 ### models.py
