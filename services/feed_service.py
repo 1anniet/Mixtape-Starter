@@ -29,7 +29,11 @@ def get_friends_listening_now(user_id: str) -> list[dict]:
     if not user:
         raise ValueError(f"User {user_id} not found")
 
-    cutoff = datetime.now(timezone.utc) - RECENT_THRESHOLD
+    # FIX: Use a naive UTC datetime instead of datetime.now(timezone.utc).
+    # This prevents timezone-aware vs timezone-naive comparison mismatches
+    # against SQLite's naive DateTime column storage, which caused older
+    # events to leak into the feed.
+    cutoff = datetime.utcnow() - RECENT_THRESHOLD
     friend_ids = [f.id for f in user.friends]
 
     if not friend_ids:
