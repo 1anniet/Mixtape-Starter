@@ -131,3 +131,6 @@ Removed the [:-1] slice parameter entirely, changing the statement to return [so
 
 **Side-effect check:**
 Reran pytest tests/test_playlists.py to confirm both test_playlist_returns_all_songs and test_playlist_returns_songs_in_order now pass perfectly without breaking any adjacent playlist functionality.
+
+**Screenshot of git log --oneline**
+![Screenshot 2026-07-07 at 11.08.44 PM.png](Screenshot%202026-07-07%20at%2011.08.44%20PM.png)
